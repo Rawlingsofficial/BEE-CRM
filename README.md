@@ -13,23 +13,36 @@ The CRM provides multiple sections for managing customer interactions, editing t
 - **Search and Filter**: Staff can search and filter knowledge base entries using keywords from the question or answer fields. Filters allow categorization of the entries, which makes it easier to find relevant responses.
 - **Editable Knowledge Base**: Authorized staff can add new questions and answers to the knowledge base or edit existing entries. This functionality ensures that customer service responses remain up-to-date and relevant.
 - **Delete Questions**: Staff members can delete outdated or irrelevant questions from the knowledge base. A simple form-based interface allows for easy deletion.
-
+---
+**Screenshot Knowledge Base**
+![Knowledge Base](images/knowledgebase.png)
+---
 ### 2. Logging Customer Interactions
 - **Interaction Logging**: Customer service staff can log customer interactions by inputting details such as customer name, contact information, query, and resolution status.
 - **Suggested Resolution**: The CRM system automatically suggests resolutions based on keywords from the query entered, providing a faster response for common inquiries.
 - **Manual Resolution Entry**: If no suggested resolution is found, staff can manually enter a resolution. Interaction logs include a 'status' field to track the progress of each case (e.g., 'Pending', 'Resolved', 'Escalated').
 - **Display of Logged Interactions**: All logged interactions are displayed in a table format within the CRM, giving staff visibility into previous customer interactions and case statuses.
-
+---
+**Screenshot Interactions.**
+![Interactions](images/interactions.png)
+---
 ### 3. Managing Interactions
 - **Interaction Filters**: Customer service staff can filter interactions based on customer name, contact information, and status, making it easier to find specific cases or track unresolved interactions.
 - **Edit Existing Interactions**: Staff can edit interaction details, including status and category. This feature allows for easy updates to logged interactions, ensuring that customer records remain accurate and up-to-date.
 - **Track Interaction Status**: The CRM offers a real-time view of customer interactions, showing their status (e.g., 'Pending', 'Resolved', 'Escalated'), helping staff prioritize tasks effectively.
+---
+**Screenshot Managing Interactions**
+![Manage Interactions](images/manageinteractions.png)
+---
 
 ### 4. Analytics Dashboard
 - **Status Metrics**: The dashboard provides an overview of the number of interactions in each status (e.g., 'Resolved', 'Escalated', 'Pending'), helping management monitor the performance of customer service teams.
 - **Category Breakdown**: Analytics break down interactions by category (e.g., 'Mobility Complaints', 'Financing Issues', 'Incident Records'), providing insights into the most frequent types of customer inquiries.
 - **Export Data**: Admin users can export interaction data to an Excel file for further analysis or record-keeping, making it easy to analyze CRM data outside of the platform.
-
+---
+**Screenshot Analytics Dashboard**
+![Dashboard](images/dashboard.png)
+---
 ### 5. Excel Integration
 - **Data Export**: The CRM system allows for exporting logged interactions to an Excel file, which can be used for reporting or further analysis.
 - **Excel File Creation**: If the interactions data does not already exist in an Excel file, the system will automatically create the file, ensuring data persistence in an accessible format.
