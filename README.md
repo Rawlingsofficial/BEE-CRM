@@ -1,107 +1,127 @@
-# Bee Mobility CRM Project
+# Bee Mobility CRM System - Official Codebase
 
-## Comprehensive Overview
-The Bee Mobility CRM is an interactive, user-friendly platform designed to streamline customer service operations, manage knowledge base content, and track customer interactions efficiently. Hosted without the need for user login credentials, anyone with the access link can use the CRM system, ensuring quick, easy access for the customer service team. This platform is built with **Streamlit** for a responsive web-based interface, with **Bootstrap** styling for a sleek, modern design.
+## Overview
 
-The CRM provides multiple sections for managing customer interactions, editing the knowledge base, and reviewing important metrics, all within a centralized dashboard. By offering real-time data updates, editable knowledge base entries, and an intuitive interface, the Bee Mobility CRM improves team efficiency and enhances the overall customer support experience.
+The Bee Mobility CRM system is designed to handle customer interactions, maintain a knowledge base, and provide insightful analytics for customer service teams. This system allows customer service staff to log and manage customer queries, track resolutions, and update statuses while ensuring the knowledge base is always up-to-date.
 
----
+This `README.md` provides an overview of the **code structure**, **function definitions**, and **purpose** of each section in the CRM system code.
 
-## Key Features
+## Main Code Overview
 
-### 1. Knowledge Base Management
-- **Search and Filter**: Staff can search and filter knowledge base entries using keywords from the question or answer fields. Filters allow categorization of the entries, which makes it easier to find relevant responses.
-- **Editable Knowledge Base**: Authorized staff can add new questions and answers to the knowledge base or edit existing entries. This functionality ensures that customer service responses remain up-to-date and relevant.
-- **Delete Questions**: Staff members can delete outdated or irrelevant questions from the knowledge base. A simple form-based interface allows for easy deletion.
----
-**Screenshot Knowledge Base**
-![Knowledge Base](images/knowledgebase.png)
----
-### 2. Logging Customer Interactions
-- **Interaction Logging**: Customer service staff can log customer interactions by inputting details such as customer name, contact information, query, and resolution status.
-- **Suggested Resolution**: The CRM system automatically suggests resolutions based on keywords from the query entered, providing a faster response for common inquiries.
-- **Manual Resolution Entry**: If no suggested resolution is found, staff can manually enter a resolution. Interaction logs include a 'status' field to track the progress of each case (e.g., 'Pending', 'Resolved', 'Escalated').
-- **Display of Logged Interactions**: All logged interactions are displayed in a table format within the CRM, giving staff visibility into previous customer interactions and case statuses.
----
-**Screenshot Interactions.**
-![Interactions](images/interactions.png)
----
-### 3. Managing Interactions
-- **Interaction Filters**: Customer service staff can filter interactions based on customer name, contact information, and status, making it easier to find specific cases or track unresolved interactions.
-- **Edit Existing Interactions**: Staff can edit interaction details, including status and category. This feature allows for easy updates to logged interactions, ensuring that customer records remain accurate and up-to-date.
-- **Track Interaction Status**: The CRM offers a real-time view of customer interactions, showing their status (e.g., 'Pending', 'Resolved', 'Escalated'), helping staff prioritize tasks effectively.
----
-**Screenshot Managing Interactions**
-![Manage Interactions](images/manageinteractions.png)
----
+The CRM system is built using **Streamlit**, **SQLite3**, **Pandas**, and **openpyxl**. It leverages **AgGrid** for managing data tables and includes an interactive UI with **Bootstrap** for a responsive design.
 
-### 4. Analytics Dashboard
-- **Status Metrics**: The dashboard provides an overview of the number of interactions in each status (e.g., 'Resolved', 'Escalated', 'Pending'), helping management monitor the performance of customer service teams.
-- **Category Breakdown**: Analytics break down interactions by category (e.g., 'Mobility Complaints', 'Financing Issues', 'Incident Records'), providing insights into the most frequent types of customer inquiries.
-- **Export Data**: Admin users can export interaction data to an Excel file for further analysis or record-keeping, making it easy to analyze CRM data outside of the platform.
----
-**Screenshot Analytics Dashboard**
-![Dashboard](images/dashboard.png)
----
-### 5. Excel Integration
-- **Data Export**: The CRM system allows for exporting logged interactions to an Excel file, which can be used for reporting or further analysis.
-- **Excel File Creation**: If the interactions data does not already exist in an Excel file, the system will automatically create the file, ensuring data persistence in an accessible format.
-- **Writing to Excel**: Data from interactions is saved to an Excel file, making it easy to track customer service activity over time and maintain a record of past queries and resolutions.
-
-### 6. User Interface
-- **Responsive Design**: The CRM system is built using Streamlit with Bootstrap integration, ensuring that the interface is responsive and accessible on all devices, including desktops, tablets, and smartphones.
-- **Clean Layout**: The CRM is designed with a user-friendly layout that minimizes complexity and enhances user experience. Important sections such as 'Knowledge Base', 'Interactions', and 'Analytics' are clearly labeled and easy to navigate.
-
-### 7. Security and Access Control
-- While the CRM does not require login credentials, access to sensitive administrative functions, such as editing the knowledge base or exporting data, is limited to authorized users.
-- The system ensures that only designated users can make changes to the knowledge base, preventing unauthorized edits and ensuring content accuracy.
-
-### 8. Real-Time Updates
-- The CRM updates in real-time, meaning any changes made to interactions or the knowledge base are immediately visible to all users accessing the platform. This feature ensures that all team members are on the same page and can access the most current information at all times.
-
-### 9. Data Protection
-- **Data Encryption**: The CRM uses secure connections to ensure that all customer data entered into the system is protected.
-- **Privacy**: Sensitive customer information is handled with care, and the system ensures compliance with best practices for data privacy and protection.
+Below is a breakdown of the key functions and their purpose within the codebase:
 
 ---
 
-## Project Context
-This CRM system was developed as part of a real-world project at Bee Mobility, where I was tasked with creating an efficient, scalable, and user-friendly tool for the customer service team. The project was implemented to solve the challenges of managing customer interactions, maintaining an up-to-date knowledge base, and ensuring fast, accurate responses to customer inquiries. This simplified version of the CRM reflects the core features and functionalities implemented during the project.
+### **1. Utility Functions**
+
+#### `create_excel_file_if_not_exists()`
+
+- **Purpose**: Initializes the Excel file (`interactions.xlsx`) if it does not exist. This is important for storing logs of interactions if they are not stored in the SQLite database.
+- **Description**: If the Excel file does not exist, it creates one with a sheet titled "Interactions".
+
+#### `write_to_excel(df)`
+
+- **Purpose**: Writes the customer interactions DataFrame (`df`) to the Excel file (`interactions.xlsx`).
+- **Description**: This function allows for exporting customer interaction data to Excel, useful for offline access or backup.
+
+#### `fetch_table_data(table_name)`
+
+- **Purpose**: Fetches data from a specified SQLite table and returns it as a Pandas DataFrame.
+- **Description**: This function is used to retrieve the knowledge base and interaction data stored in the SQLite database, making it accessible for manipulation and display within the CRM.
+
+#### `update_interaction_status(interaction_id, new_status, new_category)`
+
+- **Purpose**: Updates the status and category of a specific interaction.
+- **Description**: This function is called when a customer interaction is edited (for example, changing its status from "Pending" to "Resolved").
+
+#### `log_interaction(customer_name, contact_info, customer_query, resolution, status, category)`
+
+- **Purpose**: Logs a new customer interaction to the SQLite database.
+- **Description**: This function inserts a new record into the "interactions" table, storing information about the customer, their query, resolution, status, and category.
 
 ---
 
-## Why This Project is Special
-This was one of my favorite projects so far. It provided me with an opportunity to work on a real-world problem and deliver a solution that had a direct, positive impact on the business. Seeing the CRM in use by the Bee Mobility customer service team and knowing that it was solving problems for both the team and the customers made the effort truly rewarding.
+### **2. UI and Rendering Functions**
+
+#### `include_bootstrap()`
+
+- **Purpose**: Includes the Bootstrap framework in the Streamlit app for responsive and modern UI design.
+- **Description**: This function integrates Bootstrap styles to ensure that the app layout is mobile-friendly and visually appealing, providing a professional user interface for the CRM.
+
+#### `render_knowledge_base()`
+
+- **Purpose**: Displays and manages the knowledge base section of the CRM.
+- **Description**: This function allows users to search and filter the knowledge base, edit entries, delete questions, and add new ones. It uses **AgGrid** to create an editable table of knowledge base entries (questions and answers).
+
+#### `render_interactions()`
+
+- **Purpose**: Renders the interaction logging interface.
+- **Description**: This function provides fields for logging customer interactions, such as customer name, contact info, query, resolution, and status. It also provides suggested resolutions from the knowledge base and handles the logging process when the user clicks "Log Interaction".
+
+#### `render_manage_interactions()`
+
+- **Purpose**: Displays and manages customer interactions that have been logged.
+- **Description**: This function allows customer service teams to filter interactions by customer name, contact info, or status. It also provides an option to edit the status or category of logged interactions.
+
+#### `render_analytics()`
+
+- **Purpose**: Renders the analytics dashboard.
+- **Description**: This function provides insight into the CRM system’s data, including metrics such as the number of resolved, escalated, and pending interactions, as well as category breakdowns (e.g., Mobility Complaints, Financing Issues). It also includes functionality to export the data to an Excel file.
+
+#### `render_title_with_logo()`
+
+- **Purpose**: Displays the title of the CRM system along with the logo.
+- **Description**: This function renders a visually appealing header for the CRM app, showing the company logo and the title "CRM System".
 
 ---
 
-## Conclusion
-The Bee Mobility CRM is an essential tool for managing customer inquiries and interactions. It offers real-time updates, an editable knowledge base, and a comprehensive analytics dashboard, all while providing a responsive and user-friendly interface. It was designed with scalability in mind, ensuring that it can grow as Bee Mobility's customer service needs evolve.
+### **3. Streamlit Configuration and Main Function**
+
+#### `get_image_base64(image_path)`
+
+- **Purpose**: Converts an image to a base64-encoded string.
+- **Description**: This utility function is used to embed images (like the logo and favicon) directly into the Streamlit app without needing external image files.
+
+#### `main()`
+
+- **Purpose**: The main entry point for the Streamlit app.
+- **Description**: This function initializes the app, renders the logo and title, includes Bootstrap, and sets up tabs for navigating between different sections: Knowledge Base, Interactions, Manage Interactions, and Analytics.
 
 ---
 
-## Technologies Used
-The CRM system was developed using a combination of modern technologies to ensure scalability, ease of use, and efficient data management:
+## Database Schema
 
-- **Streamlit**: Used for creating the web-based user interface. It allows for easy integration of Python code into an interactive web application, making it ideal for rapid development and deployment.
-- **SQLite**: Chosen for local data storage. SQLite is a lightweight, serverless database engine that simplifies the deployment process, while still providing robust capabilities for storing interactions and knowledge base entries.
-- **Bootstrap**: Integrated to handle styling and ensure the interface is responsive. Bootstrap makes the web app user-friendly and accessible across different devices, including desktops, tablets, and smartphones.
-- **Pandas**: Utilized for managing data and exporting interaction logs to Excel. Pandas is ideal for data manipulation and is widely used for data analysis and reporting in Python.
-- **Python**: The core programming language, ensuring all business logic, data manipulation, and backend functionality are handled efficiently.
+The CRM uses an **SQLite** database to store interaction data and knowledge base entries. Below is the structure of the two primary tables:
 
-The integration of these technologies allowed for seamless data flow, user interaction, and responsive design, all while maintaining performance and scalability. Together, they made this CRM solution both practical for everyday use and adaptable for future growth.
+### 1. **interactions**
+
+- `id`: (INTEGER, Primary Key) Unique identifier for each interaction.
+- `customer_name`: (TEXT) The name of the customer.
+- `contact_info`: (TEXT) Contact details for the customer.
+- `query`: (TEXT) The customer’s query or issue.
+- `resolution`: (TEXT) The resolution provided to the customer.
+- `status`: (TEXT) The current status of the interaction (e.g., Pending, Resolved, Escalated).
+- `category`: (TEXT) The category of the interaction (e.g., Mobility Complaints, Financing Issues).
+- `timestamp`: (DATETIME) The time when the interaction was logged.
+
+### 2. **knowledge_base**
+
+- `id`: (INTEGER, Primary Key) Unique identifier for each knowledge base entry.
+- `category`: (TEXT) The category of the knowledge base entry (e.g., Mobility Complaints).
+- `question`: (TEXT) The question or query in the knowledge base.
+- `answer`: (TEXT) The answer or resolution provided in the knowledge base.
+- `type`: (TEXT) The type of entry (e.g., FAQ, Procedure, Troubleshooting).
 
 ---
 
-## How to Use
-1. Clone this repository to your local machine.
-2. Install the required dependencies by running:
-    ```
-    pip install -r requirements.txt
-    ```
-3. Run the Streamlit app using the following command:
-    ```
-    streamlit run app.py
-    ```
-4. The CRM interface will be accessible via the generated link. Navigate through the various tabs to manage interactions, edit the knowledge base, and review analytics.
+## Running the CRM
+
+1. Clone or download the repository to your local machine.
+2. Make sure you have **Streamlit**, **SQLite3**, **Pandas**, and **openpyxl** installed.
+3. Run the following command to start the CRM:
+
+```bash
+streamlit run app.py
 
